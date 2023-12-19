@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:visitulaanbaatar/provider/common.dart';
 import 'package:visitulaanbaatar/screens/SeeAll/SeeAllAccommodation.dart';
 import 'package:visitulaanbaatar/screens/SeeAll/SeeAllDestinations.dart';
-import '../../components/card_horizantiol.dart';
 
 class SeeAll extends StatefulWidget {
   final int index;
@@ -51,13 +50,14 @@ class _SeeAllState extends State<SeeAll> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      provider.categories[provider.categoryIndex]['name'],
-                      style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+                    // Text(
+                    //   provider.products[provider.categoryIndex]
+                    //       [provider.productIndex]['name'],
+                    //   style: TextStyle(
+                    //     fontSize: 35,
+                    //     fontWeight: FontWeight.w700,
+                    //   ),
+                    // ),
                     const TabBar(
                         labelStyle: TextStyle(fontSize: 16),
                         labelColor: Colors.black,

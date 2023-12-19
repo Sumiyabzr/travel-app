@@ -22,7 +22,7 @@ class _AccommodationState extends State<Accommodation> {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: List.generate(
-                6,
+                provider.categories.length,
                 (index) => Column(
                       children: [
                         Padding(

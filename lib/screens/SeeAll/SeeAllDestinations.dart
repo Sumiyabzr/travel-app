@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:visitulaanbaatar/components/card_horizantiol.dart';
 import 'package:visitulaanbaatar/provider/common.dart';
-import '../../global_keys.dart';
 
 class SeeAllDestinations extends StatefulWidget {
   const SeeAllDestinations({super.key});
@@ -27,7 +26,7 @@ class _SeeAllDestinationsState extends State<SeeAllDestinations> {
                 child: Column(
                   children: List.generate(
                       provider.products[provider.categoryIndex].length,
-                      (index) => Card_horizantiol(index, false)),
+                      (index) => Card_horizantiol(index, "Des")),
                 )),
           ),
         );

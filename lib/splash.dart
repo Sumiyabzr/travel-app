@@ -15,15 +15,15 @@ class _SplashState extends State<Splash> {
     super.initState();
     Timer(Duration(seconds: 5), () {
       Navigator.pop(context);
-      Navigator.popAndPushNamed(context, '/');
+      Navigator.popAndPushNamed(context, '/boarding');
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Image.network(
-        "http://192.168.0.103:7000/asset/home1.jpg",
+      body: Image(
+        image: NetworkImage('http://202.179.6.26:8000/asset/Other/splash.jpg'),
         width: double.infinity,
         height: double.infinity,
       ),

@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:visitulaanbaatar/components/MiniCard.dart';
 import 'package:visitulaanbaatar/provider/common.dart';
-import 'package:visitulaanbaatar/screens/SeeAll/SeeAll.dart';
+import 'package:visitulaanbaatar/screens/SeeAll/SeeAllComm.dart';
 
 class Commercial_screen extends StatefulWidget {
   const Commercial_screen({super.key});
@@ -32,19 +32,17 @@ class _Commercial_screenState extends State<Commercial_screen> {
                 ),
               )
             ],
-            leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                  size: 28,
-                )),
+            centerTitle: true,
+            title: Text(
+              'Commercial',
+              style: TextStyle(fontSize: 16, color: Colors.black),
+            ),
           ),
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
               children: List.generate(
-                  2,
+                  provider.commCategory.length,
                   (index) => Column(
                         children: [
                           Padding(
@@ -54,7 +52,7 @@ class _Commercial_screenState extends State<Commercial_screen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Hotel",
+                                  provider.commCategory[index]['name'],
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700),
@@ -62,6 +60,10 @@ class _Commercial_screenState extends State<Commercial_screen> {
                                 InkWell(
                                   onTap: () {
                                     provider.setCategoryIndex(index);
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SeeAllComm()));
                                   },
                                   child: Text(
                                     'See all',
@@ -87,10 +89,10 @@ class _Commercial_screenState extends State<Commercial_screen> {
                                     crossAxisAlignment:
                                         WrapCrossAlignment.start,
                                     spacing: 15,
-                                    // children: List.generate(
-                                    //     provider.products[index].length,
-                                    //     (index1) => MiniCard(
-                                    //         '/accCamp', index, index1)),
+                                    children: List.generate(
+                                        provider.commProduct[index].length,
+                                        (index1) => MiniCard('/commDetail',
+                                            "commProduct", index, index1)),
                                   ),
                                 )),
                           ),

@@ -136,3 +136,130 @@ class EventProductBloc extends Bloc<EventProductEvent, EventProductState> {
     });
   }
 }
+
+// CommCategory
+class CommCategoryBloc extends Bloc<CommCategoryEvent, CommCategoryState> {
+  CommCategoryBloc() : super(CommCategoryInitial()) {
+    on<CommCategoryGetAll>((event, emit) async {
+      if (Provider.of<CommonProvider>(GlobalKeys.navigatorKey.currentContext!,
+              listen: false)
+          .commCategory
+          .isEmpty) {
+        emit(CommCategoryLoading());
+        try {
+          final api = ApiService();
+          final res = await api.getRequest('/category/commercial', true);
+          print('Comm category orj irlee!');
+          Provider.of<CommonProvider>(GlobalKeys.navigatorKey.currentContext!,
+                  listen: false)
+              .setCommCategory(res.data);
+          emit(CommCategorySuccess());
+        } catch (ex) {
+          print(ex);
+          emit(CommCategoryFailure(ex.toString()));
+        }
+      }
+    });
+  }
+}
+
+// CommProduct
+class CommProductBloc extends Bloc<CommProductEvent, CommProductState> {
+  CommProductBloc() : super(CommProductInitial()) {
+    on<CommProductGetAll>((event, emit) async {
+      if (Provider.of<CommonProvider>(GlobalKeys.navigatorKey.currentContext!,
+              listen: false)
+          .commProduct
+          .isEmpty) {
+        emit(CommProductLoading());
+        try {
+          final api = ApiService();
+          List<String> categoryData = [
+            "Hotels",
+            "Food",
+            "Fashion",
+            "Nightlife",
+            "Shopping",
+            "Wellness",
+            "Activities"
+          ];
+          for (int i = 0; i < categoryData.length; i++) {
+            var res =
+                await api.getRequest('/product/' + categoryData[i].toString());
+            print('$i dah commCategoriin product orj irlee');
+            Provider.of<CommonProvider>(GlobalKeys.navigatorKey.currentContext!,
+                    listen: false)
+                .setCommProducts(res.data);
+          }
+          emit(CommProductSuccess());
+        } catch (ex) {
+          print(ex);
+          emit(CommProductFailure(ex.toString()));
+        }
+      }
+    });
+  }
+}
+
+//CulturalCategory
+class CulturalCategoryBloc
+    extends Bloc<CulturalCategoryEvent, CulturalCategoryState> {
+  CulturalCategoryBloc() : super(CulturalCategoryInitial()) {
+    on<CulturalCategoryGetAll>((event, emit) async {
+      if (Provider.of<CommonProvider>(GlobalKeys.navigatorKey.currentContext!,
+              listen: false)
+          .culturalCategory
+          .isEmpty) {
+        emit(CulturalCategoryLoading());
+        try {
+          final api = ApiService();
+          final res = await api.getRequest('/category/Cultural', true);
+          print('Cultural category orj irlee!');
+          Provider.of<CommonProvider>(GlobalKeys.navigatorKey.currentContext!,
+                  listen: false)
+              .setCulturalCategory(res.data);
+          emit(CulturalCategorySuccess());
+        } catch (ex) {
+          print(ex);
+          emit(CulturalCategoryFailure(ex.toString()));
+        }
+      }
+    });
+  }
+}
+
+// CulturalProduct
+class CulturalProductBloc
+    extends Bloc<CulturalProductEvent, CulturalProductState> {
+  CulturalProductBloc() : super(CulturalProductInitial()) {
+    on<CulturalProductGetAll>((event, emit) async {
+      if (Provider.of<CommonProvider>(GlobalKeys.navigatorKey.currentContext!,
+              listen: false)
+          .culturalProduct
+          .isEmpty) {
+        emit(CulturalProductLoading());
+        try {
+          final api = ApiService();
+          List<String> categoryData = [
+            "Museums",
+            "PlaceVisit",
+            "Monasteries",
+            "Statues",
+          ];
+          for (int i = 0; i < categoryData.length; i++) {
+            var res =
+                await api.getRequest('/product/' + categoryData[i].toString());
+            print('$i dah culturalCategoriin product orj irlee');
+            Provider.of<CommonProvider>(GlobalKeys.navigatorKey.currentContext!,
+                    listen: false)
+                .setCulturalProducts(res.data);
+          }
+          emit(CulturalProductSuccess());
+        } catch (ex) {
+          print(ex);
+          emit(CulturalProductFailure(ex.toString()));
+        }
+      }
+    });
+  }
+}

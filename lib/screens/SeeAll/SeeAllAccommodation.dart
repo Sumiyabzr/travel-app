@@ -26,8 +26,11 @@ class _SeeAllAccommodationState extends State<SeeAllAccommodation> {
                 ),
                 child: Column(
                   children: List.generate(
-                      provider.accProducts[provider.categoryIndex].length,
-                      (index) => Card_horizantiol(index, true)),
+                      provider
+                          .accProducts[provider.categoryIndex]
+                              [provider.productIndex]
+                          .length,
+                      (index) => Card_horizantiol(index, "Acc")),
                 )),
           ),
         );

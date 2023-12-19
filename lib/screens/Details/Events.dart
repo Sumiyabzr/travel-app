@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:visitulaanbaatar/provider/common.dart';
 
@@ -31,7 +32,7 @@ class _EventDetailState extends State<EventDetail> {
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         filterQuality: FilterQuality.high,
-                        image: NetworkImage("http://192.168.0.103:7000/asset/" +
+                        image: NetworkImage("http://202.179.6.26:8000/asset/" +
                             provider.eventProducts[provider.categoryIndex]
                                 [provider.productIndex]['thumb']))),
                 child: Container(
@@ -100,21 +101,34 @@ class _EventDetailState extends State<EventDetail> {
                         ),
                       ),
                       Text(
-                        "/" +
-                            provider.eventProducts[provider.categoryIndex]
-                                [provider.productIndex]['productType'] +
-                            "/",
+                        provider.eventProducts[provider.categoryIndex]
+                            [provider.productIndex]['productType'],
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
                       SizedBox(height: 10),
-                      Text(
-                        provider.eventProducts[provider.categoryIndex]
-                            [provider.productIndex]['description'],
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 13,
-                          wordSpacing: 2,
+                      // Text(
+                      //   provider.eventProducts[provider.categoryIndex]
+                      //       [provider.productIndex]['description'],
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.w500,
+                      //     fontSize: 13,
+                      //     wordSpacing: 2,
+                      //   ),
+                      // ),
+                      SingleChildScrollView(
+                        child: Container(
+                          child: ReadMoreText(
+                            provider.eventProducts[provider.categoryIndex]
+                                [provider.productIndex]['description'],
+                            trimLines: 6,
+                            textAlign: TextAlign.justify,
+                            trimMode: TrimMode.Line,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 13,
+                                wordSpacing: 2),
+                          ),
                         ),
                       )
                     ]),
@@ -141,7 +155,7 @@ class _EventDetailState extends State<EventDetail> {
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                          "http://192.168.0.103:7000/asset/" +
+                                          "http://202.179.6.26:8000/asset/" +
                                               provider.eventProducts[provider
                                                           .categoryIndex]
                                                       [provider.productIndex]
@@ -156,7 +170,7 @@ class _EventDetailState extends State<EventDetail> {
                       alignment: Alignment.bottomCenter,
                       child: SmoothPageIndicator(
                         controller: _controller,
-                        count: 6,
+                        count: 5,
                         effect: WormEffect(
                             activeDotColor: Colors.red,
                             dotColor: Color.fromARGB(255, 109, 109, 109),
@@ -189,7 +203,7 @@ class _EventDetailState extends State<EventDetail> {
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                          "http://192.168.0.103:7000/asset/" +
+                                          "http://202.179.6.26:8000/asset/" +
                                               provider.eventProducts[provider
                                                           .categoryIndex]
                                                       [provider.productIndex]
@@ -204,10 +218,11 @@ class _EventDetailState extends State<EventDetail> {
                       alignment: Alignment.bottomCenter,
                       child: SmoothPageIndicator(
                         controller: _controller_,
-                        count: provider
-                            .eventProducts[provider.categoryIndex]
-                                [provider.productIndex]['images2']
-                            .length,
+                        count: 5,
+                        // provider
+                        //     .eventProducts[provider.categoryIndex]
+                        //         [provider.productIndex]['images2']
+                        //     .length,
                         effect: WormEffect(
                             activeDotColor: Colors.red,
                             dotColor: Color.fromARGB(255, 109, 109, 109),
@@ -228,14 +243,17 @@ class _EventDetailState extends State<EventDetail> {
                     child: PageView.builder(
                         controller: _controller__,
                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                        itemCount: 5,
+                        itemCount: provider
+                            .eventProducts[provider.categoryIndex]
+                                [provider.productIndex]['images2']
+                            .length,
                         itemBuilder: (context, index) => Container(
                               width: size.width,
                               height: 250,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                          "http://192.168.0.103:7000/asset/" +
+                                          "http://202.179.6.26:8000/asset/" +
                                               provider.eventProducts[provider
                                                           .categoryIndex]
                                                       [provider.productIndex]

@@ -27,17 +27,11 @@ class _BoardingState extends State<Boarding> {
             });
           },
           children: [
-            _page(
-                "http://192.168.0.103:7000/asset/home2.jpg",
-                "Welcome to Mongolia",
+            _page("assets/images/board1.jpg", "Welcome to Mongolia",
                 "Save your data, watch offline on a plane, train, or submarine..."),
-            _page(
-                "http://192.168.0.103:7000/asset/home3.jpg",
-                "Welcome to Mongolia",
+            _page("assets/images/board2.jpg", "Welcome to Mongolia",
                 "Save your data, watch offline on a plane, train, or submarine..."),
-            _page(
-                "http://192.168.0.103:7000/asset/home4.jpg",
-                "Welcome to Mongolia",
+            _page("assets/images/board3.jpg", "Welcome to Mongolia",
                 "Save your data, watch offline on a plane, train, or submarine...")
           ],
         ),
@@ -53,7 +47,10 @@ class _BoardingState extends State<Boarding> {
                         width: double.infinity,
                         child: TextButton(
                           onPressed: () {
-                            Navigator.popAndPushNamed(context, '/');
+                            // showDialog(
+                            //     context: context,
+                            //     builder: (context) => SelectLanguageDialog());
+                            Navigator.popAndPushNamed(context, '/NavBar');
                           },
                           child: const Text(
                             "Get Started",
@@ -162,7 +159,7 @@ class _BoardingState extends State<Boarding> {
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.005), BlendMode.darken),
-              image: NetworkImage(imgUrl))),
+              image: AssetImage(imgUrl))),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [

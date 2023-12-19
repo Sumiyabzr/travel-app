@@ -18,6 +18,31 @@ class _DestinationsState extends State<Destinations> {
     return Consumer<CommonProvider>(
       builder: (context, provider, child) {
         return Scaffold(
+          // appBar: AppBar(
+          //   elevation: 0,
+          //   backgroundColor: Colors.white,
+          //   centerTitle: true,
+          //   title: Text(
+          //     'Destinations',
+          //     style: TextStyle(color: Colors.black, fontSize: 16),
+          //   ),
+          // ),
+          // bottomNavigationBar: BottomNavigationBar(items: [
+          //   BottomNavigationBarItem(
+          //     icon: Icon(
+          //       Icons.account_circle,
+          //       color: Colors.black,
+          //     ),
+          //     label: 'Home',
+          //   ),
+          //   BottomNavigationBarItem(
+          //       icon: Icon(Icons.manage_accounts),
+          //       label: 'Home',
+          //       backgroundColor: Colors.black),
+          //   BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          //   BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          //   // BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home')
+          // ]),
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),

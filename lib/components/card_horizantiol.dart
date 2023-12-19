@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:visitulaanbaatar/screens/Details/Accommodation.dart';
 
-import '../global_keys.dart';
 import '../provider/common.dart';
 import '../screens/Details/Destinations.dart';
 
 class Card_horizantiol extends StatefulWidget {
   final int index;
-  final bool screen;
+  final String screen;
   const Card_horizantiol(this.index, this.screen, {super.key});
 
   get data => null;
@@ -22,14 +22,16 @@ class Card_horizantiolState extends State<Card_horizantiol> {
     final size = MediaQuery.of(context).size;
     return Consumer<CommonProvider>(
       builder: (context, provider, child) {
-        return widget.screen
+        return widget.screen == "Acc"
             ? Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: GestureDetector(
                   onTap: () => {
-                    provider.setProductIndex(widget.index),
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_context) => DesDetail()))
+                    provider.setSubProductIndex(widget.index),
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_context) => AccDetail("accProduct")))
                   },
                   child: Container(
                     height: size.height * 0.18,
@@ -47,11 +49,11 @@ class Card_horizantiolState extends State<Card_horizantiol> {
                               image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
-                                      "http://192.168.0.103:7000/asset/" +
+                                      "http://202.179.6.26:8000/asset/" +
                                           provider.accProducts[
                                                       provider.categoryIndex]
                                                   [provider.productIndex]
-                                              [widget.index]['photo'][0]))),
+                                              [widget.index]['photo']))),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -119,98 +121,201 @@ class Card_horizantiolState extends State<Card_horizantiol> {
                   ),
                 ),
               )
-            : Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: GestureDetector(
-                  onTap: () => {
-                    provider.setProductIndex(widget.index),
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_context) => DesDetail()))
-                  },
-                  child: Container(
-                    height: size.height * 0.18,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey.withOpacity(0.2)),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: size.height * 0.17,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      "http://192.168.0.103:7000/asset/" +
-                                          provider.products[
-                                                  provider.categoryIndex]
-                                              [widget.index]['photo']))),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 17),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                width: size.width * 0.48,
-                                child: Text(
-                                  provider.products[provider.categoryIndex]
-                                      [widget.index]['name'],
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.location_on, size: 12),
-                                    SizedBox(
-                                      width: size.width * 0.47,
-                                      child: Text(
-                                          provider.products[
-                                                  provider.categoryIndex]
-                                              [widget.index]['location'],
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 11,
-                                          )),
+            : widget.screen == "Des"
+                ? Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: GestureDetector(
+                      onTap: () => {
+                        provider.setProductIndex(widget.index),
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_context) => DesDetail()))
+                      },
+                      child: Container(
+                        height: size.height * 0.18,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.grey.withOpacity(0.2)),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: size.height * 0.17,
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          "http://202.179.6.26:8000/asset/" +
+                                              provider.products[
+                                                      provider.categoryIndex]
+                                                  [widget.index]['photo']))),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 17),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width: size.width * 0.48,
+                                    child: Text(
+                                      provider.products[provider.categoryIndex]
+                                          [widget.index]['name'],
+                                      style: TextStyle(fontSize: 18),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Expanded(
-                                child: SizedBox(
-                                  width: size.width * 0.49,
-                                  child: Text(
-                                    provider.products[provider.categoryIndex]
-                                        [widget.index]['description'],
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    maxLines: 4,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.location_on, size: 12),
+                                        SizedBox(
+                                          width: size.width * 0.47,
+                                          child: Text(
+                                              provider.products[
+                                                      provider.categoryIndex]
+                                                  [widget.index]['location'],
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 11,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      width: size.width * 0.49,
+                                      child: Text(
+                                        provider.products[
+                                                provider.categoryIndex]
+                                            [widget.index]['description'],
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        maxLines: 4,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        )
-                      ],
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
+                  )
+                : Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: GestureDetector(
+                      onTap: () => {
+                        provider.setProductIndex(widget.index),
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_context) =>
+                                    AccDetail("commProduct")))
+                      },
+                      child: Container(
+                        height: size.height * 0.18,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.grey.withOpacity(0.2)),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: size.height * 0.17,
+                              height: double.infinity,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          "http://202.179.6.26:8000/asset/" +
+                                              provider.commProduct[
+                                                      provider.categoryIndex]
+                                                  [widget.index]['photo']))),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 17),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width: size.width * 0.48,
+                                    child: Text(
+                                      provider.commProduct[provider
+                                          .categoryIndex][widget.index]['name'],
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.location_on, size: 12),
+                                        SizedBox(
+                                          width: size.width * 0.47,
+                                          child: Text(
+                                              // provider.commProduct[
+                                              //         provider.categoryIndex]
+                                              //     [widget.index]['location'],
+                                              "Location",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 11,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      width: size.width * 0.49,
+                                      child: Text(
+                                        provider.commProduct[
+                                                provider.categoryIndex]
+                                            [widget.index]['description'],
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        maxLines: 4,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
       },
     );
   }
